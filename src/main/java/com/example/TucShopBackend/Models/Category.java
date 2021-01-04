@@ -15,7 +15,7 @@ public class Category {
     String name;
     String image;
     boolean active;
-    Long parentID;
+//    Long parentID;
 
 
     @JsonIgnore
@@ -29,13 +29,13 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String image, List<Product> product, Menu menu, boolean active, Long parentID) {
+    public Category(String name, String image, List<Product> product, Menu menu, boolean active) {
         this.name = name;
         this.image = image;
         this.product = product;
         this.menu = menu;
         this.active = active;
-        this.parentID = parentID;
+
     }
 
     public Long getId() {
@@ -78,13 +78,13 @@ public class Category {
         this.active = active;
     }
 
-    public Long getParentID() {
-        return parentID;
-    }
-
-    public void setParentID(Long parentID) {
-        this.parentID = parentID;
-    }
+//    public Long getParentID() {
+//        return parentID;
+//    }
+//
+//    public void setParentID(Long parentID) {
+//        this.parentID = parentID;
+//    }
 
     public boolean isActive() {
         return active;

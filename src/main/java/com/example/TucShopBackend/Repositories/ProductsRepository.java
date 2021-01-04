@@ -78,24 +78,24 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
             "where pt.product.id = p.id AND pt.transaction.id = t.id AND t.status='complete' ")
     public  List<Object>  getTotalprofit();
 
-    @Query(value = "Select Sum(costprice*qty) from tucshop.product where active =1;",nativeQuery = true)
+    @Query(value = "Select Sum(costprice*qty) from product where active =1;",nativeQuery = true)
     public Long getTotalInventory();
 
 
-    @Query(value = "Select Sum(costprice*qty)from tucshop.product p where p.date1 BETWEEN cast(:startDate as date)AND cast(:endDate as date)",nativeQuery = true)
+    @Query(value = "Select Sum(costprice*qty)from product p where p.date1 BETWEEN cast(:startDate as date)AND cast(:endDate as date)",nativeQuery = true)
     public Long getFilteredTotalInventory(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
 
-    @Query(value = "select * from tucshop.product where active = 1",nativeQuery = true)
+    @Query(value = "select * from product where active = 1",nativeQuery = true)
     List<Product> getAll();
 
-    @Query(value = "select * from tucshop.product where active = 1", nativeQuery = true)
+    @Query(value = "select * from product where active = 1", nativeQuery = true)
     Page<Product> findByCondition(Pageable pageable);
 
-    @Query(value="select * from tucshop.product where product.sku=:code AND product.active =1",nativeQuery = true)
+    @Query(value="select * from product where product.sku=:code AND product.active =1",nativeQuery = true)
     public Product getProductByBarCode(@Param("code") String code);
 
-    @Query(value="select * from tucshop.product where product.sku=:code AND product.active =1 AND product.id !=:id",nativeQuery = true)
+    @Query(value="select * from product where product.sku=:code AND product.active =1 AND product.id !=:id",nativeQuery = true)
     public Product getDistinctProductByBarCode(@Param("code") String code,@Param("id") Long id );
 
     @Query(value = "Select new com.example.TucShopBackend.DTO.OnlineProductDTO(p.id,p.name,p.image,p.price,p.category.id) from Product p where p.onlineProduct = 'yes'")

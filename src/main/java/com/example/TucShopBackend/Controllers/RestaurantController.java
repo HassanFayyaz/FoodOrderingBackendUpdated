@@ -25,6 +25,7 @@ public class RestaurantController {
 
     @GetMapping("/")
     public ApiResponse getRestaurantList(){
+
         return restaurantService.getRestaurantList();
     }
 

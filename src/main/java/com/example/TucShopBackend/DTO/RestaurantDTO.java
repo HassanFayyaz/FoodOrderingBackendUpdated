@@ -7,16 +7,26 @@ public class RestaurantDTO {
     String restaurantType;
     String restaurantContactNumber;
     String restaurantEmail;
+    Long userId;
 
     public RestaurantDTO() {
     }
 
-    public RestaurantDTO(String restaurantName, String restaurantAddress, String restaurantType, String restaurantContactNumber, String restaurantEmail) {
+    public RestaurantDTO(String restaurantName, String restaurantAddress, String restaurantType, String restaurantContactNumber, String restaurantEmail, Long userId) {
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.restaurantType = restaurantType;
         this.restaurantContactNumber = restaurantContactNumber;
         this.restaurantEmail = restaurantEmail;
+        this.userId = userId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getRestaurantName() {

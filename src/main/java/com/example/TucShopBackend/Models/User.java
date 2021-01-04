@@ -1,6 +1,7 @@
 package com.example.TucShopBackend.Models;
 
 import com.example.TucShopBackend.Config.LocalDateEncryptDecryptConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -45,7 +46,13 @@ public class User {
 	@Convert(converter = LocalDateEncryptDecryptConverter.class)
 	LocalDate accountAccessDate;
 
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "restaurant_id", referencedColumnName = "id")
+//	private Restaurant restaurant;
 
+	@JsonIgnore
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private Restaurant restaurant;
 
     public User() {
 	}
@@ -158,5 +165,13 @@ public class User {
 
 	public void setAccountAccessDate(LocalDate accountAccessDate) {
 		this.accountAccessDate = accountAccessDate;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
 	}
 }

@@ -13,10 +13,10 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     public Category findCategoriesByName(String category);
 
 
-    @Query(value ="select * from category where active =1 AND parentid IS NULL" ,nativeQuery = true)
+    @Query(value ="select * from category where active =1" ,nativeQuery = true)
     List<Category> getAll();
 
-    @Query(value = "select * from category  where parentid = :id AND active = 1", nativeQuery = true)
+    @Query(value = "select * from category  AND active = 1", nativeQuery = true)
     List<Category>
     getSubCategoriesById(@Param("id") Long id);
 

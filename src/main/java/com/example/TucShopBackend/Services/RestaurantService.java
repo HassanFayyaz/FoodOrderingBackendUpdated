@@ -4,8 +4,11 @@ import com.cloudinary.Api;
 import com.example.TucShopBackend.Commons.ApiResponse;
 import com.example.TucShopBackend.Commons.Status;
 import com.example.TucShopBackend.DTO.RestaurantDTO;
+import com.example.TucShopBackend.Models.Menu;
 import com.example.TucShopBackend.Models.Restaurant;
+import com.example.TucShopBackend.Repositories.MenuRepository;
 import com.example.TucShopBackend.Repositories.RestaurantRepository;
+import com.example.TucShopBackend.Repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,12 @@ public class RestaurantService {
 
     @Autowired
     RestaurantRepository restaurantRepository;
+    @Autowired
+    MenuRepository menuRepository;
+    @Autowired
+    UserDao userDao;
+
+
     public ApiResponse addRestaurant(RestaurantDTO restaurantDTO){
        Restaurant restaurantFind = restaurantRepository.getByRestaurantName(restaurantDTO.getRestaurantName());
         if(restaurantFind != null){
@@ -31,7 +40,12 @@ public class RestaurantService {
             restaurant.setRestaurantEmail(restaurantDTO.getRestaurantEmail());
             restaurant.setRestaurantType(restaurantDTO.getRestaurantType());
             restaurant.setActive(true);
+            restaurant.setUser(userDao.findById(restaurantDTO.getUserId()).get());
             restaurantRepository.save(restaurant);
+            Menu menu = new Menu();
+            menu.setRestaurant(restaurant);
+            menu.setActive(true);
+            menuRepository.save(menu);
             return new ApiResponse(Status.Status_Ok,"Success",restaurant);
         }
     }
@@ -57,7 +71,7 @@ public class RestaurantService {
     public ApiResponse updateRestaurant(Long id,RestaurantDTO restaurantDTO){
 
         Optional<Restaurant> restaurant = restaurantRepository.findById(id);
-        if(restaurant!=null){
+        if(restaurant.isPresent()){
             Restaurant restaurantToUpdate = restaurant.get();
 
             restaurantToUpdate.setRestaurantName(restaurantDTO.getRestaurantName());
