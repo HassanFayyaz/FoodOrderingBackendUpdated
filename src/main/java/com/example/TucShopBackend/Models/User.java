@@ -54,6 +54,9 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Restaurant restaurant;
 
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private Address address;
+
     public User() {
 	}
 
@@ -173,5 +176,13 @@ public class User {
 
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }

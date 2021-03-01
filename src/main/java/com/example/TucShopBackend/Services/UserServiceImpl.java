@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserDetailsService {
 			}
 			else {
 
-				if(user.getAccountAccessKey().equalsIgnoreCase("permanet")){
+				if(user.getAccountAccessKey().equalsIgnoreCase("permanent")){
 					newUser.setAccountAccessKey(user.getAccountAccessKey());
 					newUser.setAccountAccessDate(LocalDate.now());
 					newUser.setAccountExpire(LocalDate.now().plusYears(1));
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserDetailsService {
 
 	public ApiResponse getUserById(Long id) {
 
-		return new ApiResponse(200,"Fetch Successfully",userDao.findById(id));
+		return new ApiResponse(200,"Fetch Successfully",userDao.findById(id).get());
 
 	}
 
