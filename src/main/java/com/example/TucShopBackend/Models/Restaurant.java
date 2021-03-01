@@ -13,30 +13,27 @@ public class Restaurant {
     String restaurantType;
     String restaurantContactNumber;
     String restaurantEmail;
-    boolean active;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    String restaurantImage;
+    boolean isActive;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
     public Restaurant() {
     }
 
 
-    public Restaurant(String restaurantName, String restaurantAddress, String restaurantType, String restaurantContactNumber, String restaurantEmail, boolean active) {
+    public Restaurant(String restaurantName, String restaurantAddress, String restaurantType, String restaurantContactNumber, String restaurantEmail, User user, String restaurantImage, boolean isActive) {
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.restaurantType = restaurantType;
         this.restaurantContactNumber = restaurantContactNumber;
         this.restaurantEmail = restaurantEmail;
-        this.active = active;
+        this.user = user;
+        this.restaurantImage = restaurantImage;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -87,11 +84,27 @@ public class Restaurant {
         this.restaurantEmail = restaurantEmail;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(String restaurantImage) {
+        this.restaurantImage = restaurantImage;
+    }
+
     public boolean isActive() {
-        return active;
+        return isActive;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        isActive = active;
     }
 }

@@ -1,8 +1,7 @@
 package com.example.TucShopBackend.Commons;
 
-/**
- * Created by ASAD QURESHI on 2/4/2020.
- */
+
+
 public class CustomConstants {
 
 
@@ -19,6 +18,10 @@ public class CustomConstants {
     public static final String PROD_DELETE = "Product deleted successfully";
     public static final String PROD_GET = "Product Get successfully";
     public static final String CAT_GETERROR = "Failed to find category";
+
+
+    public static final String RES_IMAGE_ERROR = "Image not saved";
+
     public static final String DEV = "dev";
     public static final String PROD = "prod";
 

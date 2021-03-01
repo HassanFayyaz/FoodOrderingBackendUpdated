@@ -21,8 +21,6 @@ public class CategoryDTO {
     public CategoryDTO() {
     }
 
-
-
     public String getName() {
         return name;
     }
