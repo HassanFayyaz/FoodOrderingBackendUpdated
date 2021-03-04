@@ -9,6 +9,7 @@ public class AuthToken {
     private String accountAccessKey;
     private Boolean active;
     private Long id;
+    private Long restaurantId;
 
     public AuthToken(String token, String username, String userType ) {
         this.token = token;
@@ -29,7 +30,17 @@ public class AuthToken {
 
     }
 
-//    public AuthToken(String token, String username, String userType, String email, String accountAccessKey) {
+    public AuthToken(String token, String username, String userType, String email, String accountAccessKey, Boolean active, Long id, Long restaurantId) {
+        this.token = token;
+        this.username = username;
+        this.userType = userType;
+        this.email = email;
+        this.accountAccessKey = accountAccessKey;
+        this.active = active;
+        this.id = id;
+        this.restaurantId = restaurantId;
+    }
+    //    public AuthToken(String token, String username, String userType, String email, String accountAccessKey) {
 //        this.token = token;
 //        this.username = username;
 //        this.userType = userType;
@@ -103,5 +114,13 @@ public class AuthToken {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(Long restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }

@@ -123,6 +123,7 @@ public class RestaurantService {
     }
 
     public ApiResponse getRestaurantList(){
+
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         return new ApiResponse(Status.Status_Ok,"Success",restaurantList);
     }

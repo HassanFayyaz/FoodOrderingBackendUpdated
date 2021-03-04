@@ -743,4 +743,8 @@ public class    ProductsService {
             return new ApiResponse(Status.Status_ERROR,"Online products by filtered price not found",null);
         }
     }
+
+    public List<Product> getByRestaurantId(Long id) {
+       return productsRepository.getAllByRestaurantId(id);
+    }
 }

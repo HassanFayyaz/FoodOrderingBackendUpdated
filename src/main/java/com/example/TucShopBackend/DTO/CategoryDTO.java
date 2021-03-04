@@ -10,13 +10,13 @@ public class CategoryDTO {
 
     @NotNull(message = "Name cannot be null")
     String name;
-    Long parentID;
-    Long childID;
+//    Long parentID;
+//    Long childID;
     MultipartFile image;
 
     List<Product> productList;
 
-    Long menu_id;
+    Long restaurant_id;
 
     public CategoryDTO() {
     }
@@ -45,19 +45,28 @@ public class CategoryDTO {
         this.productList = productList;
     }
 
-    public Long getParentID() {
-        return parentID;
+//    public Long getParentID() {
+//        return parentID;
+//    }
+//
+//    public void setParentID(Long parentID) {
+//        this.parentID = parentID;
+//    }
+
+//    public Long getMenu_id() {
+//        return menu_id;
+//    }
+//
+//    public void setMenu_id(Long menu_id) {
+//        this.menu_id = menu_id;
+//    }
+
+
+    public Long getRestaurant_id() {
+        return restaurant_id;
     }
 
-    public void setParentID(Long parentID) {
-        this.parentID = parentID;
-    }
-
-    public Long getMenu_id() {
-        return menu_id;
-    }
-
-    public void setMenu_id(Long menu_id) {
-        this.menu_id = menu_id;
+    public void setRestaurant_id(Long restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 }
