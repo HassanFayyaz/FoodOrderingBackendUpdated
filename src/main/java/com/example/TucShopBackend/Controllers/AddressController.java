@@ -5,7 +5,7 @@ import com.example.TucShopBackend.Models.Address;
 import com.example.TucShopBackend.Services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/address")
 public class AddressController {
