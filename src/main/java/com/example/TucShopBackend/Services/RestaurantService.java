@@ -4,8 +4,11 @@ import com.example.TucShopBackend.Commons.ApiResponse;
 import com.example.TucShopBackend.Commons.CustomConstants;
 import com.example.TucShopBackend.Commons.Status;
 import com.example.TucShopBackend.DTO.RestaurantDTO;
+import com.example.TucShopBackend.Models.Menu;
 import com.example.TucShopBackend.Models.Restaurant;
+import com.example.TucShopBackend.Repositories.MenuRepository;
 import com.example.TucShopBackend.Repositories.RestaurantRepository;
+import com.example.TucShopBackend.Repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamResource;
@@ -34,8 +37,12 @@ public class RestaurantService {
 
     @Autowired
     RestaurantRepository restaurantRepository;
+    @Autowired
+    MenuRepository menuRepository;
+    @Autowired
+    UserDao userDao;
 
-    public ApiResponse addRestaurant(RestaurantDTO restaurantDTO) {
+    public ApiResponse  addRestaurant(RestaurantDTO restaurantDTO) {
 
        List<Restaurant> restaurantList = restaurantRepository.findAll();
 
@@ -60,9 +67,14 @@ public class RestaurantService {
                 restaurant.setRestaurantContactNumber(restaurantDTO.getRestaurantContactNumber());
                 restaurant.setRestaurantEmail(restaurantDTO.getRestaurantEmail());
                 restaurant.setRestaurantType(restaurantDTO.getRestaurantType());
+                restaurant.setUser(userDao.findById(restaurantDTO.getUserId()).get());
                 restaurant.setRestaurantImage(restaurantImageUrl + restaurantDTO.getRestaurantName() + "/" + unique + restaurantDTO.getRestaurantImage().getOriginalFilename());
                 restaurant.setActive(true);
                 restaurantRepository.save(restaurant);
+                Menu menu = new Menu();
+                menu.setRestaurant(restaurant);
+                menu.setActive(true);
+                menuRepository.save(menu);
                 return new ApiResponse(Status.Status_Ok,"Success",restaurant);
             }
 

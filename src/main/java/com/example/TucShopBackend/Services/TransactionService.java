@@ -3,6 +3,7 @@ package com.example.TucShopBackend.Services;
 import com.example.TucShopBackend.Commons.ApiResponse;
 import com.example.TucShopBackend.Commons.Status;
 import com.example.TucShopBackend.Config.PdfUtil;
+import com.example.TucShopBackend.DTO.NotReviewDTO;
 import com.example.TucShopBackend.DTO.ProductsDTO;
 import com.example.TucShopBackend.DTO.ScearchTransactionDTO;
 import com.example.TucShopBackend.DTO.TransactionsDTO;
@@ -91,6 +92,7 @@ public class TransactionService {
             transactions.setRiderId("0");
         }
 
+        transactions.setIsReview(transactionsDTO.getIsReview());
         amount = transactions.getAmount();
         discount = transactionsDTO.getDiscount();
         costPrice = transactionsDTO.getCostprice();
@@ -576,6 +578,11 @@ public class TransactionService {
 
          return new ApiResponse(Status.Status_Ok, "Order Completed! Online Transaction Successfully Saved", transactionsRepository.save(transactions));
 
+    }
+
+    public ApiResponse getListOfNotReviewOrders(String name){
+     List<NotReviewDTO> orderReviewList = transactionsRepository.getListOfNotReviewOrders(name);
+     return new ApiResponse(Status.Status_Ok,"Success",orderReviewList);
     }
 
 }

@@ -94,6 +94,7 @@ public class CategoryService {
                             Category category = new Category();
                             category.setImage(categoryImageUrl + categoryDTO.getName() + "/" + unique + categoryDTO.getImage().getOriginalFilename());
                             category.setName(categoryDTO.getName());
+
                             category.setMenu(menu);
 //                            if (categoryDTO.getParentID() != null) {
 //                                category.setParentID(categoryDTO.getParentID());
