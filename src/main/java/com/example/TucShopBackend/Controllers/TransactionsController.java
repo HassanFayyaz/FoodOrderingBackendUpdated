@@ -125,6 +125,11 @@ public class TransactionsController {
     return this.transactionService.postTransactionByOnlineOrderId(id, user);
     }
 
+    @GetMapping("/notreviewlist/{name}")
+    public ApiResponse getListOfNotReviewOrders(@PathVariable("name") String name){
+        return transactionService.getListOfNotReviewOrders(name);
+    }
+
 }
 
 

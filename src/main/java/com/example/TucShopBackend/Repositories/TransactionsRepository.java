@@ -2,7 +2,9 @@ package com.example.TucShopBackend.Repositories;
 
 import com.example.TucShopBackend.DTO.CategoryQuantityDTO;
 import com.example.TucShopBackend.DTO.ChartDataDTO;
+import com.example.TucShopBackend.DTO.NotReviewDTO;
 import com.example.TucShopBackend.DTO.TransactionsDTO;
+import com.example.TucShopBackend.Models.OrderReview;
 import com.example.TucShopBackend.Models.Transactions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -53,9 +55,6 @@ public interface TransactionsRepository extends JpaRepository<Transactions,Long>
     @Query(value = "select sum(amountfrom transactions t where t.status='complete' and closing_status='OPEN' and created_by=:userName", nativeQuery = true)
     public Double totalTransactionsOfUser(@Param("userName") String userName);
 
-
-
-
     @Query(value="select SUM(amount) from transactions t where t.date BETWEEN cast(:startDate as date)AND cast(:endDate as date) AND  t.status='complete'",nativeQuery = true)
     public Double filteredTransaction(String startDate, String endDate);
 
@@ -87,6 +86,8 @@ public interface TransactionsRepository extends JpaRepository<Transactions,Long>
     @Query(value = "SELECT * FROM transactions t WHERE  t.date BETWEEN :startDate AND :endDate AND t.status='complete' ", nativeQuery = true)
     List<Transactions> downloadTransactionByDate(@Param("startDate") String startDate,@Param("endDate") String endDate);
 
+    @Query(value = "Select new com.example.TucShopBackend.DTO.NotReviewDTO(t.id,t.createdBy,t.isReview) FROM Transactions t where t.createdBy =:name AND t.isReview = 'NR'")
+     List<NotReviewDTO> getListOfNotReviewOrders(@Param("name") String name);
 
 
 }

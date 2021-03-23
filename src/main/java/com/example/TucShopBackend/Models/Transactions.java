@@ -35,6 +35,9 @@ public class Transactions {
     Long tableNumber;
     Double profit;
 
+    //Three status NR,R,Never
+    String isReview;
+
 
                        //request user
                        //status pending complete
@@ -50,10 +53,13 @@ public class Transactions {
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
     private Set<ProductTransaction> productTransactions;
 
+    @OneToOne(mappedBy = "transactions")
+    OrderReview orderReview;
+
     public Transactions() {
     }
 
-    public Transactions(Long id, Double profit, LocalDate date, Double amount, String createdBy, String updatedBy, String requestedUser, String status, String action, Double discount, Set<ProductTransaction> productTransactions) {
+    public Transactions(Long id, Double profit, LocalDate date, Double amount, String createdBy, String updatedBy, String requestedUser, String status, String action, Double discount, Set<ProductTransaction> productTransactions,String isReview, OrderReview orderReview) {
         this.id = id;
         this.date = date;
         this.amount = amount;
@@ -64,6 +70,8 @@ public class Transactions {
         this.status = status;
         this.action = action;
         this.productTransactions = productTransactions;
+        this.isReview = isReview;
+        this.orderReview = orderReview;
     }
 
 //    public Transactions(String name, ProductTransaction... productTransactions) {
@@ -201,6 +209,24 @@ public class Transactions {
 
     public void setProfit(Double profit) {
         this.profit = profit;
+    }
+
+    public String getIsReview() {
+        return isReview;
+    }
+
+    public OrderReview getOrderReview() {
+        return orderReview;
+    }
+
+    public void setOrderReview(OrderReview orderReview) {
+        this.orderReview = orderReview;
+    }
+
+    public void setIsReview(String isReview) {
+        this.isReview = isReview;
+
+
     }
 }
 

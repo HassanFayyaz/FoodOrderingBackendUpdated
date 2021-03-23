@@ -38,10 +38,10 @@ public class MyRunner implements CommandLineRunner {
 //        Uncomment below lines if you want to create User and Admin By My runner.
 //        LocalDate expireDate = LocalDate.now().plusMonths(1);
 //        LocalDate accessDate = LocalDate.now();
-
+//
 //        userRepository.save(new User("t@t.com ", "usertest", bcryptEncoder.encode("111"),true, "USER", 1l, accessDate, expireDate,"trial"));
 //        userRepository.save(new User("a@a.com ", "admintest", bcryptEncoder.encode("111"),true, "ADMIN", 1l, accessDate, expireDate,"trial"));
-//
+
 //        tokenRepository.save(new Token("lWOCaQ19Mn"));
 //        tokenRepository.save(new Token("i49FRSwDXK"));
 //        tokenRepository.save(new Token("Efb5ZgY6ru"));

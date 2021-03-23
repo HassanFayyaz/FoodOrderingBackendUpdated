@@ -24,18 +24,19 @@ public class TransactionsDTO  implements Serializable {
     Long tableNumber;
     Double profit;
     Double costprice;
-
+    String isReview;
 
    List<ProductTransaction> productTransactions;
 
 
-    public TransactionsDTO(Double amount, Double costprice,  String action, String requestedUser, Double discount, List<ProductTransaction> productTransactions) {
+    public TransactionsDTO(Double amount, Double costprice,  String action, String requestedUser, Double discount, List<ProductTransaction> productTransactions,String isReview) {
         this.amount = amount;
         this.action = action;
         this.requestedUser = requestedUser;
         this.discount = discount;
         this.productTransactions = productTransactions;
         this.costprice = costprice;
+        this.isReview = isReview;
 
     }
 
@@ -52,6 +53,7 @@ public class TransactionsDTO  implements Serializable {
         this.updatedBy = updatedBy;
         this.status = status;
         this.profit = profit;
+
     }
 
     public Double getAmount() {
@@ -164,5 +166,13 @@ public class TransactionsDTO  implements Serializable {
 
     public void setCostprice(Double costprice) {
         this.costprice = costprice;
+    }
+
+    public String getIsReview() {
+        return isReview;
+    }
+
+    public void setIsReview(String isReview) {
+        this.isReview = isReview;
     }
 }
