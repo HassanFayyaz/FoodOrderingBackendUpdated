@@ -16,7 +16,7 @@ public class CategoryDTO {
 
     List<Product> productList;
 
-    Long menu_id;
+    Long restaurant_id;
 
     public CategoryDTO() {
     }
@@ -53,11 +53,20 @@ public class CategoryDTO {
 //        this.parentID = parentID;
 //    }
 
-    public Long getMenu_id() {
-        return menu_id;
+//    public Long getMenu_id() {
+//        return menu_id;
+//    }
+//
+//    public void setMenu_id(Long menu_id) {
+//        this.menu_id = menu_id;
+//    }
+
+
+    public Long getRestaurant_id() {
+        return restaurant_id;
     }
 
-    public void setMenu_id(Long menu_id) {
-        this.menu_id = menu_id;
+    public void setRestaurant_id(Long restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 }

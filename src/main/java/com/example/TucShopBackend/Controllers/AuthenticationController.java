@@ -7,7 +7,9 @@ import com.example.TucShopBackend.Config.JwtTokenUtil;
 import com.example.TucShopBackend.Config.LocalDateEncryptDecryptConverter;
 import com.example.TucShopBackend.DTO.LoginUser;
 import com.example.TucShopBackend.DTO.UserDto;
+import com.example.TucShopBackend.Models.Restaurant;
 import com.example.TucShopBackend.Models.User;
+import com.example.TucShopBackend.Repositories.RestaurantRepository;
 import com.example.TucShopBackend.Repositories.UserDao;
 import com.example.TucShopBackend.Services.UserServiceImpl;
 import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
@@ -45,6 +47,9 @@ public class AuthenticationController {
     UserDao userDaoRepo;
 
     @Autowired
+    RestaurantRepository restaurantRepository;
+
+    @Autowired
     LocalDateEncryptDecryptConverter localDateEncryptDecryptConverter;
 
 
@@ -79,15 +84,33 @@ public class AuthenticationController {
                 user.setTime(time);
                 user.setDate(date);
                 userDaoRepo.save(user);
-                return new ApiResponse<>(200, "success", new AuthToken(token,user.getId(), user.getName(), user.getUserType(), user.getEmail(),user.getAccountAccessKey(),user.getActive()));
+               Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+               if(restaurant==null) {
+                   return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+               }
+               else{
+                   return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+               }
             } else {
                 if (user.getDate().equals(date)) {
-                    return new ApiResponse<>(200, "success", new AuthToken(token,user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive() ));
+                    Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                    if(restaurant==null) {
+                        return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                    }
+                    else{
+                        return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                    }
                 } else if (user.getDate() != date && user.getTime() != time) {
                     user.setTime(time);
                     user.setDate(date);
                     userDaoRepo.save(user);
-                    return new ApiResponse<>(200, "success", new AuthToken(token,user.getId(), user.getName(), user.getUserType(), user.getEmail(),user.getAccountAccessKey(), user.getActive()));
+                    Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                    if(restaurant==null) {
+                        return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                    }
+                    else{
+                        return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                    }
                 }
             }
 
@@ -101,7 +124,13 @@ public class AuthenticationController {
                     userDaoRepo.save(user);
                     return new ApiResponse<>(200, "Trial Version has Expired", null);
                 }
-                return new ApiResponse<>(200, "Trial Version has Expired", null);
+                Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                if(restaurant==null) {
+                    return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                }
+                else{
+                    return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                }
             }
 
             LocalDateTime loginTime = LocalDateTime.now();
@@ -112,19 +141,44 @@ public class AuthenticationController {
                 user.setTime(time);
                 user.setDate(date);
                 userDaoRepo.save(user);
-                return new ApiResponse<>(200, "success", new AuthToken(token,user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                if(restaurant==null) {
+                    return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                }
+                else{
+                    return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                }
             } else {
                 if (user.getDate().equals(date)) {
-                    return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(),user.getAccountAccessKey(),user.getActive()));
+
+                    Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                    if(restaurant==null) {
+                        return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                    }
+                    else{
+                        return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                    }
                 } else if (user.getDate() != date && user.getTime() != time) {
                     user.setTime(time);
                     user.setDate(date);
                     userDaoRepo.save(user);
-                    return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(),user.getAccountAccessKey(), user.getActive()));
+                    Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+                    if(restaurant==null) {
+                        return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+                    }
+                    else{
+                        return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+                    }
                 }
             }
         }
-        return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(),user.getName(), user.getUserType(), user.getEmail(),user.getAccountAccessKey(), user.getActive()));
+        Restaurant restaurant= restaurantRepository.findByUserId(user.getId());
+        if(restaurant==null) {
+            return new ApiResponse<>(200, "success", new AuthToken(token, user.getId(), user.getName(), user.getUserType(), user.getEmail(), user.getAccountAccessKey(), user.getActive()));
+        }
+        else{
+            return new ApiResponse<>(200, "success", new AuthToken(token,user.getName(),user.getUserType(),user.getEmail(),user.getAccountAccessKey(),user.getActive(),user.getId(),restaurant.getId()));
+        }
     }
 
 

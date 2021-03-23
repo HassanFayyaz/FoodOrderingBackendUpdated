@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -116,4 +117,6 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
     @Query(value = "Select new com.example.TucShopBackend.DTO.OnlineProductDTO(p.id,p.name,p.image,p.price,p.category.id) from Product p ORDER BY p.id DESC")
     public List<Object> sortOnlineProductsByNewness();
 
+    @Query(value = "select * from product  p where p.category_id In (select id from category c  where c.menu_id= (select id  from menu m where m.restaurant_id = :id) )",nativeQuery = true)
+    List<Product> getAllByRestaurantId(@Param("id") Long id);
 }

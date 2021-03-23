@@ -23,6 +23,9 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     @Query(value = "select * from category where parentid is not null", nativeQuery = true)
     List<Category> getAllSubCategories();
 
+    @Query(value = "select * from category c  where c.menu_id= (select id  from menu m where m.restaurant_id =:id)",nativeQuery = true)
+    List<Category> findByRetaurantId(@Param("id") Long id);
+
 //    public String findByName(String categoryName);
 
 

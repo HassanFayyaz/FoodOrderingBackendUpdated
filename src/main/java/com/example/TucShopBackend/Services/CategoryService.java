@@ -88,7 +88,7 @@ public class CategoryService {
                     String unique = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
                     if(saveCategoryImage(categoryDTO.getImage(),categoryDTO.getName(),unique)){
 
-                        Optional<Menu> menuOptional = menuRepository.findById(categoryDTO.getMenu_id());
+                        Optional<Menu> menuOptional = menuRepository.findByRestaurantId(categoryDTO.getRestaurant_id());
                         if(menuOptional!=null) {
                             Menu menu = menuOptional.get();
                             Category category = new Category();
@@ -303,5 +303,10 @@ public class CategoryService {
             return new ApiResponse(200,"Fetched All SubCategories", categoryRepository.getAllSubCategories());
         }
      return  new ApiResponse(200, "Fetched Sucessfully", categoryRepository.getSubCategoriesById(id))  ;
+    }
+
+    public List<Category> getByRestaurantId(Long id) {
+
+       return categoryRepository.findByRetaurantId(id);
     }
 }

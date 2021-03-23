@@ -37,7 +37,10 @@ public class CategoryController {
         return this.categoryService.getById(id);
     }
 
-
+    @GetMapping ("/abc/{id}")
+    public List<Category> getByRestaurantId (@PathVariable("id") Long id ){
+        return this.categoryService.getByRestaurantId(id);
+    }
     @GetMapping ("/")
     public List<Category> getAll (CategoryDTO categoryDTO ){
         return categoryService.getAll();
