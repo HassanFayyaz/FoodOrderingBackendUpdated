@@ -34,7 +34,7 @@ public class Transactions {
     String waiterName;
     Long tableNumber;
     Double profit;
-
+    String riderId;
 
                        //request user
                        //status pending complete
@@ -66,7 +66,26 @@ public class Transactions {
         this.productTransactions = productTransactions;
     }
 
-//    public Transactions(String name, ProductTransaction... productTransactions) {
+    public Transactions(Long id, LocalDate date, Double amount, String createdBy, String updatedBy, String requestedUser, String status, String action, String closingStatus, LocalTime transactionTime, Double discount, String waiterName, Long tableNumber, Double profit, String riderId, Set<ProductTransaction> productTransactions) {
+        this.id = id;
+        this.date = date;
+        this.amount = amount;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+        this.requestedUser = requestedUser;
+        this.status = status;
+        this.action = action;
+        this.closingStatus = closingStatus;
+        this.transactionTime = transactionTime;
+        this.discount = discount;
+        this.waiterName = waiterName;
+        this.tableNumber = tableNumber;
+        this.profit = profit;
+        this.riderId = riderId;
+        this.productTransactions = productTransactions;
+    }
+
+    //    public Transactions(String name, ProductTransaction... productTransactions) {
 //        this.name = name;
 //        for(ProductTransaction pt : productTransactions) pt.setTransaction(this);
 //        this.productTransactions = Stream.of(productTransactions).collect(Collectors.toSet());
@@ -201,6 +220,14 @@ public class Transactions {
 
     public void setProfit(Double profit) {
         this.profit = profit;
+    }
+
+    public String getRiderId() {
+        return riderId;
+    }
+
+    public void setRiderId(String riderId) {
+        this.riderId = riderId;
     }
 }
 

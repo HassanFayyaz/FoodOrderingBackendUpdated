@@ -80,6 +80,17 @@ public class TransactionService {
         transactions.setAction(transactionsDTO.getAction());
         transactions.setClosingStatus("OPEN");
         transactions.setDiscount(transactionsDTO.getDiscount());
+        Optional<List<User>> optionalRiders=userDao.findByUserType("RIDER");
+        if(optionalRiders.isPresent()) {
+            List<User> riders= optionalRiders.get();
+
+            Integer randomId =(int) (Math.random() *riders.get((Integer)riders.size()-1).getId());
+            transactions.setRiderId(randomId.toString());
+        }
+        else{
+            transactions.setRiderId("0");
+        }
+
         amount = transactions.getAmount();
         discount = transactionsDTO.getDiscount();
         costPrice = transactionsDTO.getCostprice();
@@ -109,6 +120,8 @@ public class TransactionService {
 
         return new ApiResponse(Status.Status_Ok, "Transaction saved successfully", transactions);
     }
+
+
 
 
     public List<TransactionsDTO> getAll(String startDate, String endDate) {

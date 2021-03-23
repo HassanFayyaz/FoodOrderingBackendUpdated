@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
@@ -20,4 +21,6 @@ public interface UserDao extends JpaRepository<User, Long> {
 
     @Query(value = "select * from user u where u.name=:user and u.user_type='USER' ", nativeQuery = true)
     List <User> getUserByLogin(@Param("user") String user);
+
+    Optional<List<User>> findByUserType(String userType);
 }
