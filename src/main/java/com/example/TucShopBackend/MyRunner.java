@@ -1,6 +1,5 @@
 package com.example.TucShopBackend;
 
-
 import com.example.TucShopBackend.Models.Category;
 import com.example.TucShopBackend.Models.Token;
 import com.example.TucShopBackend.Models.User;
@@ -8,6 +7,7 @@ import com.example.TucShopBackend.Repositories.CategoryRepository;
 import com.example.TucShopBackend.Repositories.TokenRepository;
 import com.example.TucShopBackend.Repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -18,6 +18,9 @@ import java.time.LocalDate;
 public class MyRunner implements CommandLineRunner {
 
 //    private static final Logger logger = LoggerFactory.getLogger(MyRunner.class);
+
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    String onCreateOrUpdate;
 
     @Autowired
     private UserDao userRepository;
@@ -34,13 +37,14 @@ public class MyRunner implements CommandLineRunner {
 
 //        userRepository.save(new User("b@b.com", "Admin", bcryptEncoder.encode("111"),true, "ADMIN", 1L, "TRAIL"));
 
-
 //        Uncomment below lines if you want to create User and Admin By My runner.
-//        LocalDate expireDate = LocalDate.now().plusMonths(1);
-//        LocalDate accessDate = LocalDate.now();
+//            LocalDate expireDate = LocalDate.now().plusMonths(1);
+//            LocalDate accessDate = LocalDate.now();
 //
-//        userRepository.save(new User("t@t.com ", "usertest", bcryptEncoder.encode("111"),true, "USER", 1l, accessDate, expireDate,"trial"));
-//        userRepository.save(new User("a@a.com ", "admintest", bcryptEncoder.encode("111"),true, "ADMIN", 1l, accessDate, expireDate,"trial"));
+//            userRepository.save(new User("t@t.com ", "usertest", bcryptEncoder.encode("111"),true, "USER", 1l, accessDate, expireDate,"trial"));
+//            userRepository.save(new User("a@a.com ", "admintest", bcryptEncoder.encode("111"),true, "ADMIN", 1l, accessDate, expireDate,"trial"));
+
+
 
 //        tokenRepository.save(new Token("lWOCaQ19Mn"));
 //        tokenRepository.save(new Token("i49FRSwDXK"));

@@ -237,6 +237,7 @@ public class Transactions {
 
     public void setRiderId(String riderId) {
         this.riderId = riderId;
+    }
     public String getIsReview() {
         return isReview;
     }

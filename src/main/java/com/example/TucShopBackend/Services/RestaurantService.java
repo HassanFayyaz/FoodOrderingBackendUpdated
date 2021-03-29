@@ -47,7 +47,7 @@ public class RestaurantService {
        List<Restaurant> restaurantList = restaurantRepository.findAll();
 
         if(restaurantList.isEmpty()){
-            String folderPath = CustomConstants.SERVER_PATH+"//"+"serverFiles//"+"//";
+            String folderPath = CustomConstants.SERVER_PATH+"//"+"serverFilesRestaurant//"+"//";
             File folder = new File(folderPath);
              deleteDirectory(folder);
         }
