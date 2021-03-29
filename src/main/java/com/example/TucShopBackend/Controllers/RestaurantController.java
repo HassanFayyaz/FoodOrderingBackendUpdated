@@ -35,7 +35,7 @@ public class RestaurantController {
 
 
     @PostMapping("/")
-    public ApiResponse addRestaurant(@RequestParam("restaurantImage") @Valid MultipartFile restaurantImage, RestaurantDTO restaurantDTO){
+    public ApiResponse addRestaurant(@RequestParam(value="restaurantImage",required = false)  MultipartFile restaurantImage,  RestaurantDTO restaurantDTO){
         restaurantDTO.setRestaurantImage(restaurantImage);
 
         return restaurantService.addRestaurant(restaurantDTO);

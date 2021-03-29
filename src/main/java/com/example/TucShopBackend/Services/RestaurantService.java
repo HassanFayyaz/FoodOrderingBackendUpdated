@@ -53,8 +53,13 @@ public class RestaurantService {
         }
 
        Restaurant restaurantFind = restaurantRepository.getByRestaurantName(restaurantDTO.getRestaurantName());
+        Restaurant findRestaurant = restaurantRepository.findByUserId(restaurantDTO.getUserId());
         if(restaurantFind != null){
-            return new ApiResponse(Status.Status_ERROR,"Restaurant Already Register by this name",null);
+            return new ApiResponse(Status.Status_DUPLICATE,"Restaurant Already Register by this name",null);
+        }
+        if(findRestaurant!= null)
+        {
+            return  new ApiResponse(Status.Status_ERROR,"Restaruant Already exist with this user");
         }
         else{
 

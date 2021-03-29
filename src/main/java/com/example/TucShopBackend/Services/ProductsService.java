@@ -72,9 +72,12 @@ public class    ProductsService {
 
     public ApiResponse saveProducts(MultipartFile[] productImages,ProductsDTO productsDTO){
 
-        if (checkProductBarcodeExsist(productsDTO,null)){
-            return new ApiResponse(Status.Status_DUPLICATE, "Barcode already exist", null);
-        }
+//
+
+
+
+
+
 
        List< Product> productName = productsRepository.findByName(productsDTO.getName(), productsDTO.getVariants());
 //
@@ -157,19 +160,20 @@ public class    ProductsService {
                             product.setOnlineProduct(productsDTO.getOnlineProduct());
                             product.setSku(productsDTO.getSku());
                             Product productObj = productsRepository.save(product);
-                            if(productObj != null && productsDTO.getOnlineProduct().equals("yes")){
-                                Arrays.asList(productImages).stream().forEach(file->{
-                                    ProductGallery productGallery = new ProductGallery();
-                                    String uniqueForGallery = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
-                                    if(saveProductImage(file,category.getName(),uniqueForGallery)){
-                                        productGallery.setImage(productImageUrl+category.getName()+"/"+productObj.getName()+"/"+uniqueForGallery+file.getOriginalFilename());
-                                        productGallery.setProduct(productObj);
-                                        productGalleryRepository.save(productGallery);
-                                    }
-                                });
-                                return new ApiResponse(Status.Status_Ok, CustomConstants.PROD_POSTED, productObj);
-                            }
-                            return new ApiResponse(Status.Status_Ok, "Product saved without gallery images", productObj);
+                            return new ApiResponse(Status.Status_Ok, CustomConstants.PROD_POSTED, productObj);
+//                            if(productObj != null && productsDTO.getOnlineProduct().equals("yes")){
+//                                Arrays.asList(productImages).stream().forEach(file->{
+//                                    ProductGallery productGallery = new ProductGallery();
+//                                    String uniqueForGallery = String.valueOf(new Timestamp(System.currentTimeMillis()).getTime());
+//                                    if(saveProductImage(file,category.getName(),uniqueForGallery)){
+//                                        productGallery.setImage(productImageUrl+category.getName()+"/"+productObj.getName()+"/"+uniqueForGallery+file.getOriginalFilename());
+//                                        productGallery.setProduct(productObj);
+//                                        productGalleryRepository.save(productGallery);
+//                                    }
+//                                });
+//                                return new ApiResponse(Status.Status_Ok, CustomConstants.PROD_POSTED, productObj);
+//                            }
+//                            return new ApiResponse(Status.Status_Ok, "Product saved without gallery images", productObj);
 
                         }
                         break;

@@ -6,7 +6,7 @@ public class RestaurantDTO {
 
     String restaurantName;
     String restaurantAddress;
-    String restaurantType;
+        String restaurantType;
     String restaurantContactNumber;
     String restaurantEmail;
 
