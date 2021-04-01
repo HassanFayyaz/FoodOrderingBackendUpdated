@@ -15,6 +15,7 @@ public class UserDto {
     private String accountAccessKey;
     private LocalDate accountExpire;
     private LocalDate accountAccessDate;
+    private String address;
 
 	public UserDto(String name, LocalDate accountAccessDate, String accountAccessKey, LocalDate accountExpire, String date, String time, String email, String password, Boolean active, String userType, Long clientId) {
 		this.name = name;
@@ -30,6 +31,20 @@ public class UserDto {
 		this.accountAccessDate = accountAccessDate;
 	}
 
+	public UserDto(String name, String email, String password, Boolean active, String userType, Long clientId, String date, String time, String accountAccessKey, LocalDate accountExpire, LocalDate accountAccessDate, String address) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.active = active;
+		this.userType = userType;
+		this.clientId = clientId;
+		this.date = date;
+		this.time = time;
+		this.accountAccessKey = accountAccessKey;
+		this.accountExpire = accountExpire;
+		this.accountAccessDate = accountAccessDate;
+		this.address = address;
+	}
 
 	public UserDto() {
 	}

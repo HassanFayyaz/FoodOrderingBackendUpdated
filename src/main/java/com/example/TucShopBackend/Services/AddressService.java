@@ -47,4 +47,8 @@ public class AddressService {
         address.setUser(userDao.findById(addressDTO.getUserId()).get());
             return addressRepository.save(address);
     }
+
+    public Address getAddressByUserId(Long id) {
+        return  addressRepository.findByUserId(id);
+    }
 }

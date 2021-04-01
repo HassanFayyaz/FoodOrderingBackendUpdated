@@ -173,9 +173,11 @@ public class TransactionService {
 
     }
 
-    public List<Transactions> getRecentTransactionsByUser(String user) {
+    public List<Transactions> getRecentTransactionsByUser(Long user) {
 
-        List<Transactions> transactionsListByUser = transactionsRepository.recentTransactionsOfUser(user);
+        String name = userDao.findById(user).get().getName();
+
+        List<Transactions> transactionsListByUser = transactionsRepository.recentTransactionsOfUser(name);
 
         return transactionsListByUser;
 

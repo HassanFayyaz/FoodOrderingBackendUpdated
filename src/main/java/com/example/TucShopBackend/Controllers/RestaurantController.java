@@ -5,6 +5,7 @@ import com.cloudinary.Api;
 import com.example.TucShopBackend.Commons.ApiResponse;
 import com.example.TucShopBackend.DTO.RestaurantDTO;
 
+import com.example.TucShopBackend.Models.Restaurant;
 import com.example.TucShopBackend.Services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -67,5 +68,12 @@ public class RestaurantController {
             throws IOException {
         return restaurantService.getRestaurantImage(filename,restaurant);
     }
-
+    @GetMapping("/inactive")
+    public List<Restaurant> getInactiveRestaurants(){
+        return restaurantService.getInactiveRestaurants();
+    }
+    @PutMapping("/active/{id}")
+    public Restaurant updateRestaurants(@PathVariable("id") Long id){
+        return restaurantService.updateRestaurantId(id);
+    }
 }

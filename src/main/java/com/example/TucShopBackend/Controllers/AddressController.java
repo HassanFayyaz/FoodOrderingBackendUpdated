@@ -24,4 +24,12 @@ public class AddressController {
     {
         return addressService.saveAddress(addressDTO);
     }
+
+    @GetMapping("/user/{id}")
+    public Address getAddressByUserId(@PathVariable("id") Long id){
+
+        return addressService.getAddressByUserId(id);
+    }
+
+
 }

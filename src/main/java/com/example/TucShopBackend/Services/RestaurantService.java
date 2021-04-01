@@ -200,4 +200,15 @@ public class RestaurantService {
     }
 
 
+    public List<Restaurant> getInactiveRestaurants() {
+        return restaurantRepository.getInactiveRestaurants();
+    }
+
+    public Restaurant updateRestaurantId(Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id).get();
+        restaurant.setActive(true);
+       return restaurantRepository.save(restaurant);
+//        return "Updated Successfuly";
+
+    }
 }

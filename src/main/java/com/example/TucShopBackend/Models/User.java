@@ -38,6 +38,8 @@ public class User {
     @Column
 	  private String accountAccessKey;
 
+
+
 	 @Column
 	 @Convert(converter = LocalDateEncryptDecryptConverter.class)
      LocalDate accountExpire;

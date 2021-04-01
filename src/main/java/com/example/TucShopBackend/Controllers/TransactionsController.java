@@ -84,7 +84,7 @@ public class TransactionsController {
 
 
     @GetMapping("/getRecentTransactionByUser/{user}")
-    public List<Transactions> getRecentTransactionsByUser(@PathVariable("user")String user ){
+    public List<Transactions> getRecentTransactionsByUser(@PathVariable("user")Long user ){
         return transactionService.getRecentTransactionsByUser(user);
     }
 
