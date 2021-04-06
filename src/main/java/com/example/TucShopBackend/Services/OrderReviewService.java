@@ -10,6 +10,7 @@ import com.example.TucShopBackend.Repositories.TransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,7 +25,7 @@ public class OrderReviewService {
         OrderReview orderReview = new OrderReview();
         orderReview.setComment(orderReviewDTO.getComment());
         orderReview.setReview(orderReviewDTO.getReview());
-
+        orderReview.setRestaurant_Id(orderReviewDTO.getRestaurant_Id());
         Optional<Transactions> transactionFind = transactionsRepository.findById(orderReviewDTO.getTransaction_Id());
         Transactions transaction = transactionFind.get();
         transaction.setIsReview("R");
@@ -46,6 +47,11 @@ public class OrderReviewService {
             return new ApiResponse(Status.Status_ERROR,"Not Found",null);
         }
 
+    }
+
+    public ApiResponse getBestRestaurant(String restaurantId){
+        List<String> bestRestaurantsList = orderReviewRepository.getBestRestaurantList(restaurantId);
+        return new ApiResponse(Status.Status_Ok,"Success",bestRestaurantsList);
     }
 
 

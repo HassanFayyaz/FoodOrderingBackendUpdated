@@ -16,6 +16,7 @@ public class OrderReview {
     String review;
     @Nullable
     String comment;
+    Long restaurant_Id;
     @OneToOne
     @JoinColumn(name = "transaction_id")
     Transactions transactions;
@@ -23,9 +24,10 @@ public class OrderReview {
     public OrderReview() {
     }
 
-    public OrderReview(String review, @Nullable String comment, Transactions transactions) {
+    public OrderReview(String review, @Nullable String comment, Long restaurant_Id, Transactions transactions) {
         this.review = review;
         this.comment = comment;
+        this.restaurant_Id = restaurant_Id;
         this.transactions = transactions;
     }
 
@@ -59,5 +61,13 @@ public class OrderReview {
 
     public void setTransactions(Transactions transactions) {
         this.transactions = transactions;
+    }
+
+    public Long getRestaurant_Id() {
+        return restaurant_Id;
+    }
+
+    public void setRestaurant_Id(Long restaurant_Id) {
+        this.restaurant_Id = restaurant_Id;
     }
 }

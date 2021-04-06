@@ -9,15 +9,17 @@ public class OrderReviewDTO {
     @Nullable
     String comment;
     Long transaction_Id;
+    Long restaurant_Id;
 
     public OrderReviewDTO() {
 
     }
 
-    public OrderReviewDTO(String review, @Nullable String comment, Long transaction_Id) {
+    public OrderReviewDTO(String review, @Nullable String comment, Long transaction_Id, Long restaurant_Id) {
         this.review = review;
         this.comment = comment;
         this.transaction_Id = transaction_Id;
+        this.restaurant_Id = restaurant_Id;
     }
 
     public String getReview() {
@@ -42,5 +44,13 @@ public class OrderReviewDTO {
 
     public void setTransaction_Id(Long transaction_Id) {
         this.transaction_Id = transaction_Id;
+    }
+
+    public Long getRestaurant_Id() {
+        return restaurant_Id;
+    }
+
+    public void setRestaurant_Id(Long restaurant_Id) {
+        this.restaurant_Id = restaurant_Id;
     }
 }

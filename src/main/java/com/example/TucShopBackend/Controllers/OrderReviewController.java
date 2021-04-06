@@ -25,5 +25,10 @@ public class OrderReviewController {
     public ApiResponse changeReviewStatus(@PathVariable("id") Long id, @RequestBody Transactions transactions){
         return orderReviewService.changeReviewStatus(id,transactions);
     }
+
+    @GetMapping("/restaurants/{restaurantId}")
+    public ApiResponse getBestRestaurant(@PathVariable("restaurantId") String restaurantId){
+        return orderReviewService.getBestRestaurant(restaurantId);
+    }
 }
 
