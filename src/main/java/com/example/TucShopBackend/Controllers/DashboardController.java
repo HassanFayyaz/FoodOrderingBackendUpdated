@@ -29,9 +29,9 @@ public class DashboardController {
     @Autowired
     DashboardService dashboardService;
 
-    @GetMapping("/totalproducts")
-    public ApiResponse productsQuantity(){
-        return dashboardService.productsQuantity();
+    @GetMapping("/totalproducts/{id}")
+    public ApiResponse productsQuantity(@PathVariable("id") Long id){
+        return dashboardService.productsQuantity(id);
     }
 
     @GetMapping("/filteredtotalproducts/{startDate}/{endDate}")
@@ -41,14 +41,14 @@ public class DashboardController {
         }
 
 
-    @GetMapping("/outofstockdetails")
-    public ApiResponse outOfStockProductsDetails(){
-        return dashboardService.outOfStockProductsDetails();
+    @GetMapping("/outofstockdetails/{id}")
+    public ApiResponse outOfStockProductsDetails(@PathVariable("id") Long id){
+        return dashboardService.outOfStockProductsDetails(id);
     }
 
-    @GetMapping("/outofstock")
-    public ApiResponse outofStockProducts(){
-        return  dashboardService.outOfStockProducts();
+    @GetMapping("/outofstock/{id}")
+    public ApiResponse outofStockProducts( @PathVariable("id") Long id){
+        return  dashboardService.outOfStockProducts(id);
     }
 
     @GetMapping("/outofstockfiltered/{startDate}/{endDate}")
@@ -61,9 +61,9 @@ public class DashboardController {
         return dashboardService.productQuantityDetails(startDate,endDate);
     }
 
-    @GetMapping("/totaltransaction")
-    public ApiResponse totalTransaction(){
-        return dashboardService.totalTransaction();
+    @GetMapping("/totaltransaction/{id}")
+    public ApiResponse totalTransaction(@PathVariable("id") Long id){
+        return dashboardService.totalTransaction(id);
     }
 
     @GetMapping("/filteredtransaction/{startDate}/{endDate}")
@@ -123,15 +123,15 @@ public class DashboardController {
 
     }
 
-    @GetMapping("/totalprofit")
-    public ApiResponse getTotalProfit(){
+    @GetMapping("/totalprofit/{id}")
+    public ApiResponse getTotalProfit(@PathVariable("id") Long id){
 
-        return dashboardService.getTotalProfit();
+        return dashboardService.getTotalProfit(id);
     }
 
-    @GetMapping("/totalinventory")
-    public ApiResponse getTotalInvestment(){
-        return dashboardService.getTotalInventory();
+    @GetMapping("/totalinventory/{id}")
+    public ApiResponse getTotalInvestment(@PathVariable("id") Long id){
+        return dashboardService.getTotalInventory(id);
     }
 
     @GetMapping("/totalinventory/{startDate}/{endDate}")

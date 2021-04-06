@@ -751,4 +751,14 @@ public class    ProductsService {
     public List<Product> getByRestaurantId(Long id) {
        return productsRepository.getAllByRestaurantId(id);
     }
+
+    public List<Product> getAllProductsByRest(Long id) {
+        if(id == null)
+        {
+            return getAllProducts();
+        }
+        else{
+          return   productsRepository.getByRestId(id);
+        }
+    }
 }

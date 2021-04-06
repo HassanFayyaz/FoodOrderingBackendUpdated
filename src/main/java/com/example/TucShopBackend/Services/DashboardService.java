@@ -46,25 +46,27 @@ public class DashboardService {
     SettingsRepository settingsRepository;
 
 
-    public ApiResponse productsQuantity() {
+    public ApiResponse productsQuantity(Long id) {
+        List<Product> products = productsRepository.productQauntity( id);
 
-        return new ApiResponse(Status.Status_Ok, "Sucessfully fetch total products", productsRepository.productQauntity());
+
+        return new ApiResponse(Status.Status_Ok, "Sucessfully fetch total products", products.size());
     }
 
     public ApiResponse productQuantityDetails(String startDate,String endDate) {
         return new ApiResponse(Status.Status_Ok, "Total products Details", productsRepository.productQauntityDetails(startDate,endDate));
     }
 
-    public ApiResponse outOfStockProductsDetails() {
-        return new ApiResponse(Status.Status_Ok, "Out of Stock Product", productsRepository.outOfStockProducts());
+    public ApiResponse outOfStockProductsDetails(Long id) {
+        return new ApiResponse(Status.Status_Ok, "Out of Stock Product", productsRepository.outOfStockProducts(id));
     }
 
-    public ApiResponse outOfStockProducts() {
-        return new ApiResponse(Status.Status_Ok, "Out of Stock", productsRepository.outOfStockCount());
+    public ApiResponse outOfStockProducts(Long id) {
+        return new ApiResponse(Status.Status_Ok, "Out of Stock", productsRepository.outOfStockCount(id));
     }
 
-    public ApiResponse totalTransaction() {
-        return new ApiResponse(Status.Status_Ok, "Successfully fetch Total Transaction", transactionsRepository.getTotalTransaction());
+    public ApiResponse totalTransaction(Long id) {
+        return new ApiResponse(Status.Status_Ok, "Successfully fetch Total Transaction", transactionsRepository.getTotalTransaction(id));
     }
 
     public ApiResponse transactionDetails() {
@@ -337,10 +339,10 @@ public class DashboardService {
         return new ApiResponse(Status.Status_Ok, "Succesfully Fetched", transactionsRepository.getFilteredDetailedTransaction(startDate, endDate));
     }
 
-    public ApiResponse getTotalProfit(){
+    public ApiResponse getTotalProfit(Long id){
         List<Object> getTotalProfit ;
         try {
-            getTotalProfit =productsRepository.getTotalprofit();
+            getTotalProfit =productsRepository.getTotalprofit(id);
 
         } catch(Exception e){
             return new ApiResponse(Status.Status_Ok, "Get Total Profit", null);
@@ -351,10 +353,10 @@ public class DashboardService {
 
     }
 
-    public ApiResponse getTotalInventory(){
+    public ApiResponse getTotalInventory(Long id){
         Long getTotalInventory;
         try{
-            getTotalInventory = productsRepository.getTotalInventory();
+            getTotalInventory = productsRepository.getTotalInventory(id);
         }
         catch (Exception e){
             return new ApiResponse(Status.Status_Ok,"Null",null);

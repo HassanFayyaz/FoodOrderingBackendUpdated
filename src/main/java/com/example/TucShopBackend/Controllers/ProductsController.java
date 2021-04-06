@@ -73,18 +73,23 @@ public class ProductsController {
         return productsService.getProductsByCategory(category);
     }
     //Get All Product
-    @GetMapping("/")
+    @GetMapping("")
     public List<Product> getAllProducts(){
         return productsService.getAllProducts();
     }
 
+    @GetMapping("/restaurant/{id}")
+    public List<Product> getAllProducts(@PathVariable("id") Long id){
+        return productsService.getAllProductsByRest(id);
+    }
+
     //Get All products by restaurant id
 
-    @GetMapping("/restaurant/{id}")
-    public List<Product> getRestaurantList(@PathVariable("id") Long id){
-
-        return productsService.getByRestaurantId(id);
-    }
+//    @GetMapping("/restaurant/{id}")
+//    public List<Product> getRestaurantList(@PathVariable("id") Long id){
+//
+//        return productsService.getByRestaurantId(id);
+//    }
 
 
     //Get Product on the basis of ID
