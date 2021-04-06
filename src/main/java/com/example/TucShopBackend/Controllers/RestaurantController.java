@@ -76,4 +76,9 @@ public class RestaurantController {
     public Restaurant updateRestaurants(@PathVariable("id") Long id){
         return restaurantService.updateRestaurantId(id);
     }
+
+    @PutMapping("/inactive/{id}")
+    public Restaurant makeRestaurantInactive( @PathVariable("id") Long id){
+        return restaurantService.makeRestInactive(id);
+    }
 }

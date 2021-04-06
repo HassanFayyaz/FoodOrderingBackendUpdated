@@ -211,4 +211,11 @@ public class RestaurantService {
 //        return "Updated Successfuly";
 
     }
+
+    public Restaurant makeRestInactive(Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id).get();
+        restaurant.setActive(false);
+        return restaurantRepository.save(restaurant);
+
+    }
 }

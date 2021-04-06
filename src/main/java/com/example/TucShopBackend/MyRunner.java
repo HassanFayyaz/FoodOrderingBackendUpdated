@@ -35,7 +35,7 @@ public class MyRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-//        userRepository.save(new User("b@b.com", "Admin", bcryptEncoder.encode("111"),true, "ADMIN", 1L, "TRAIL"));
+//        userRepository.save(new User("b@b.com", "Admin", bcryptEncoder.encode("111"),true, "SUPER_ADMIN", 1L, "TRAIL"));
 
 //        Uncomment below lines if you want to create User and Admin By My runner.
 //            LocalDate expireDate = LocalDate.now().plusMonths(1);
