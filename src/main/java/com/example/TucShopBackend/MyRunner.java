@@ -38,11 +38,13 @@ public class MyRunner implements CommandLineRunner {
 //        userRepository.save(new User("b@b.com", "Admin", bcryptEncoder.encode("111"),true, "SUPER_ADMIN", 1L, "TRAIL"));
 
 //        Uncomment below lines if you want to create User and Admin By My runner.
-//                LocalDate expireDate = LocalDate.now().plusMonths(1);
-//                LocalDate accessDate = LocalDate.now();
-//    //
-//                userRepository.save(new User("t@t.com ", "usertest", bcryptEncoder.encode("111"),true, "USER", 1l, accessDate, expireDate,"trial"));
-//                userRepository.save(new User("a@a.com ", "admintest", bcryptEncoder.encode("111"),true, "ADMIN", 1l, accessDate, expireDate,"trial"));
+
+//        LocalDate expireDate = LocalDate.now().plusMonths(1);
+//        LocalDate accessDate = LocalDate.now();
+//
+//        userRepository.save(new User("a@a.com ", "admintest", bcryptEncoder.encode("111"),true, "SUPER_ADMIN", 1l, accessDate, expireDate,"trial"));
+//        userRepository.save(new User("t@t.com ", "usertest", bcryptEncoder.encode("111"),true, "USER", 1l, accessDate, expireDate,"trial"));
+
 
 
 

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 
-    @Query(value = "Select * from tucshop.expense where date=:date",nativeQuery = true)
+    @Query(value = "Select * from foodorderingdb.expense where date=:date",nativeQuery = true)
     public Expense getExpenseByDate(@Param("date") String date);
 }
