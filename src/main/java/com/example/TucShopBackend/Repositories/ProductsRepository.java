@@ -39,7 +39,7 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
 //    @Query(value = "select * from products ",nativeQuery = true)
 //    public List<Product> getAllProductPriceSumDetails();
 
-    @Query(value = "select COUNT(id) from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id AND p.qty<5))",nativeQuery = true)
+    @Query(value = "select COUNT(id) from product p where p.category_id In( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id AND p.qty<5))",nativeQuery = true)
     public List<Object> outOfStockCount(@Param("rest_id") Long rest_id);
 
     @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id AND p.qty<5))",nativeQuery = true)
@@ -121,6 +121,6 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
     @Query(value = "select * from product  p where p.category_id In (select id from category c  where c.menu_id= (select id  from menu m where m.restaurant_id = :id) )",nativeQuery = true)
     List<Product> getAllByRestaurantId(@Param("id") Long id);
 
-    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id =:rest_id));",nativeQuery = true)
+    @Query(value = "select * from product p where p.category_id In( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id =:rest_id))",nativeQuery = true)
     List<Product> getByRestId(@Param("rest_id") Long rest_id);
 }
