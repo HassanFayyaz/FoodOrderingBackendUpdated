@@ -30,8 +30,8 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
     @Query(value = "select * from product where name =:name",nativeQuery = true)
     public String getAllByCategoryName(@Param("name") String name);
 
-    @Query(value = "select COUNT(id) from product where active =1",nativeQuery = true)
-        public Double  productQauntity();
+    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id))",nativeQuery = true)
+        public List<Product>  productQauntity(@Param("rest_id") Long rest_id);
 
     @Query(value = "select * from product p where p.date1 BETWEEN cast(:startDate as date)AND cast(:endDate as date)", nativeQuery = true)
     public List<Product> productQauntityDetails(String startDate,String endDate);
@@ -39,11 +39,11 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
 //    @Query(value = "select * from products ",nativeQuery = true)
 //    public List<Product> getAllProductPriceSumDetails();
 
-    @Query(value = "select COUNT(id) from product p where p.qty<10 AND active=1",nativeQuery = true)
-    public List<Object> outOfStockCount();
+    @Query(value = "select COUNT(id) from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id AND p.qty<5))",nativeQuery = true)
+    public List<Object> outOfStockCount(@Param("rest_id") Long rest_id);
 
-    @Query(value = "select * from product where qty<10 AND active=1",nativeQuery = true)
-    public List<Product> outOfStockProducts();
+    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id AND p.qty<5))",nativeQuery = true)
+    public List<Product> outOfStockProducts(@Param("rest_id") Long rest_id);
 //
 //    @Query(value = "select * from products",nativeQuery = true)
 
@@ -74,14 +74,15 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
     public List<Product> outOfStockFiltered(String startDate, String endDate);
 
 
-    @Query(value = "Select new com.example.TucShopBackend.DTO.ProfitDTO (t.date,(sum((p.price-p.costprice)*pt.quantity)) as profit) " +
+  @Query(value = "Select new com.example.TucShopBackend.DTO.ProfitDTO (t.date,(sum((p.price-p.costprice)*pt.quantity)) as profit) " +
             "from ProductTransaction pt, Transactions t, Product p " +
             "where pt.product.id = p.id AND pt.transaction.id = t.id AND t.status='complete' ")
-    public  List<Object>  getTotalprofit();
+    public  List<Object>  getTotalprofit(@Param("rest_id") Long rest_id);
 
-    @Query(value = "Select Sum(costprice*qty) from product where active =1;",nativeQuery = true)
-    public Long getTotalInventory();
+    @Query(value = "Select Sum(costprice*qty) from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id));",nativeQuery = true)
+    public Long getTotalInventory(@Param("rest_id") Long rest_id);
 
+//    p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id
 
     @Query(value = "Select Sum(costprice*qty)from product p where p.date1 BETWEEN cast(:startDate as date)AND cast(:endDate as date)",nativeQuery = true)
     public Long getFilteredTotalInventory(@Param("startDate") String startDate, @Param("endDate") String endDate);
@@ -119,4 +120,7 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
 
     @Query(value = "select * from product  p where p.category_id In (select id from category c  where c.menu_id= (select id  from menu m where m.restaurant_id = :id) )",nativeQuery = true)
     List<Product> getAllByRestaurantId(@Param("id") Long id);
+
+    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id =:rest_id));",nativeQuery = true)
+    List<Product> getByRestId(@Param("rest_id") Long rest_id);
 }

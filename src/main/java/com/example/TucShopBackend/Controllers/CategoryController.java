@@ -41,11 +41,14 @@ public class CategoryController {
     public List<Category> getByRestaurantId (@PathVariable("id") Long id ){
         return this.categoryService.getByRestaurantId(id);
     }
-    @GetMapping ("/")
-    public List<Category> getAll (CategoryDTO categoryDTO ){
-        return categoryService.getAll();
+    @GetMapping ("/restaurant/{id}")
+    public List<Category> getAllByRestId ( @PathVariable("id") Long id){
+        return categoryService.getByRestaurantId(id);
     }
-
+    @GetMapping ("/")
+    public List<Category> getAll ( ){
+           return categoryService.getAll();
+    }
     @PutMapping("/{id}")
     public  ApiResponse updateById (@PathVariable ("id") Long id,@RequestParam("image") MultipartFile image, CategoryDTO categoryDTO){
         categoryDTO.setImage(image);

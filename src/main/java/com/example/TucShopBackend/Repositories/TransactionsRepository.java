@@ -36,7 +36,7 @@ public interface TransactionsRepository extends JpaRepository<Transactions,Long>
     public List<Transactions> scearchTransactionsOfUser(@Param("date1") String date1,@Param("date2") String date2,@Param("user") String user);
 
     @Query(value = "select SUM(amount) from transactions t where t.status='complete'", nativeQuery = true)
-    public Double getTotalTransaction();
+    public Double getTotalTransaction(@Param("rest_id") Long rest_id);
 
     @Query(value = "select * from transactions t where t.status='complete' ", nativeQuery = true)
     public List<Transactions> getTransactionDetails();

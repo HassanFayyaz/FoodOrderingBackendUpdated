@@ -16,6 +16,9 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
     @Query(value ="select * from category where active =1" ,nativeQuery = true)
     List<Category> getAll();
 
+    @Query(value ="select * from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = 1) AND c.active = 1 " ,nativeQuery = true)
+    List<Category> getAllByRestId(@Param("id") Long id);
+
     @Query(value = "select * from category  AND active = 1", nativeQuery = true)
     List<Category>
     getSubCategoriesById(@Param("id") Long id);

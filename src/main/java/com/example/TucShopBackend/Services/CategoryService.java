@@ -184,7 +184,11 @@ public class CategoryService {
     }
 
     public List <Category> getAll (){
-        List <Category> categoryList =categoryRepository.getAll();
+        List<Category> categoryList;
+
+             categoryList = categoryRepository.getAll();
+
+
         return categoryList;
     }
 
@@ -309,4 +313,6 @@ public class CategoryService {
 
        return categoryRepository.findByRetaurantId(id);
     }
+
+
 }
