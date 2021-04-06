@@ -49,7 +49,7 @@ public class RestaurantService {
         if(restaurantList.isEmpty()){
             String folderPath = CustomConstants.SERVER_PATH+"//"+"serverFilesRestaurant//"+"//";
             File folder = new File(folderPath);
-             deleteDirectory(folder);
+//             deleteDirectory(folder);
         }
 
        Restaurant restaurantFind = restaurantRepository.getByRestaurantName(restaurantDTO.getRestaurantName());

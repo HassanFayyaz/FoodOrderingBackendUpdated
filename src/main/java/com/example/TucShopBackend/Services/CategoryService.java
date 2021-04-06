@@ -69,7 +69,7 @@ public class CategoryService {
         if(allCategory.isEmpty()){
             String folderPath = CustomConstants.SERVER_PATH+"//"+"serverFiles//"+"//";
             File folder = new File(folderPath);
-            deleteDirectory(folder);
+//            deleteDirectory(folder);
 
         }
         Category categoryName = categoryRepository.findCategoriesByName(categoryDTO.getName());
