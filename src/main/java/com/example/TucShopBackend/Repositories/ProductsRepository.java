@@ -30,7 +30,7 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
     @Query(value = "select * from product where name =:name",nativeQuery = true)
     public String getAllByCategoryName(@Param("name") String name);
 
-    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id))",nativeQuery = true)
+    @Query(value = "select * from product p where p.category_id =( select c.id from category c where c.menu_id In (select m.id from menu m where m.restaurant_id = :rest_id))",nativeQuery = true)
         public List<Product>  productQauntity(@Param("rest_id") Long rest_id);
 
     @Query(value = "select * from product p where p.date1 BETWEEN cast(:startDate as date)AND cast(:endDate as date)", nativeQuery = true)
@@ -79,7 +79,7 @@ public interface ProductsRepository extends JpaRepository<Product,Long> {
             "where pt.product.id = p.id AND pt.transaction.id = t.id AND t.status='complete' ")
     public  List<Object>  getTotalprofit(@Param("rest_id") Long rest_id);
 
-    @Query(value = "Select Sum(costprice*qty) from product p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id));",nativeQuery = true)
+    @Query(value = "Select Sum(costprice*qty) from product p where p.category_id In( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id));",nativeQuery = true)
     public Long getTotalInventory(@Param("rest_id") Long rest_id);
 
 //    p where p.category_id =( select c.id from category c where c.menu_id = (  select m.id from menu m where m.restaurant_id = :rest_id
